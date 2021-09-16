@@ -87,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'todo',
         'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'PASSWORD': 'rem',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -118,7 +118,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+
+TIME_ZONE = 'Asia/Bishkek'
 
 USE_I18N = True
 

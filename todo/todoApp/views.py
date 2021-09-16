@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseNotFound
+
 from .models import Todo
 
 # Получение данных из БД
@@ -15,3 +16,28 @@ def create(request):
         todo.description = request.POST.get('description')
         todo.save()
     return HttpResponseRedirect('/')
+
+#изменеине данных из бд
+def edit(request, id):
+    try:
+        todo = Todo.objects.get(id=id)
+        if request.nethod == 'POST':
+            todo.title = request.POST.get("title")
+            todo.description = request.POST.get("description")
+            todo.save()
+            return HttpResponseRedirect('/')
+
+        else:
+            return render(request, 'endex.html', {'todo':todo})
+        
+
+    except Todo.DoesNotExist:
+        return HttpResponseNotFound("<h2>задачка не найдена</h2>")
+
+def delete(request, id):
+    try:
+        todo = Todo.objects.get(id=id)
+        todo.delete()
+        return HttpResponseRedirect('/')
+    except Todo.DoesNotExist:
+        return HttpResponseNotFound("<h2>задачка не найдена</h2>")
